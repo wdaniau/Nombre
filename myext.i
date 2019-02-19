@@ -43,4 +43,15 @@
 #include "nombre.h"
 %}
 
-%include "nombre.h"
+class Nombre : public QObject
+{
+public:
+    Nombre(QObject* parent=0);
+    Nombre(double v,QObject* parent=0);
+    Nombre(double v, QString n,QObject* parent=0);
+    void setV(double v);
+    double getV();
+    double carre();
+    void setNom(QString n);
+    QString getNom();
+};
