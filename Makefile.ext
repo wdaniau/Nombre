@@ -1,0 +1,53 @@
+
+CXX = g++
+CXXFLAGS = -fPIC
+SWIG = swig
+
+Extension = myext
+SwigFile = myext.i
+# Ruby
+WrapRubyFile = myext_ruby_wrap.cxx
+RubySoExt = myrbext.so
+# Python
+WrapPythonFile = myext_python_wrap.cxx
+PythonSoExt = _mypyext.so
+PythonPyExt = mypyext.py
+
+ObjectFiles = nombre.o
+Program = testNombre
+
+RUBYINC = $(shell pkg-config --cflags ruby)
+PYTHONINC = $(shell pkg-config --cflags python3)
+
+all: $(Program) $(RubySoExt) $(PythonSoExt)
+
+$(Program): main.o $(ObjectFiles)
+	$(CXX) $(CXXFLAGS) main.o $(ObjectFiles) -o $(Program)
+
+$(RubySoExt): $(SwigFile) $(WrapRubyFile) $(ObjectFiles)
+	$(CXX) $(CXXFLAGS) -shared $(RUBYINC) \
+	$(WrapRubyFile) $(ObjectFiles) -o $(RubySoExt)
+	
+$(PythonSoExt): $(Swigfile) $(WrapPythonFile) $(ObjectFiles)
+	$(CXX) $(CXXFLAGS) -shared $(PYTHONINC) \
+	$(WrapPythonFile) $(ObjectFiles) -o $(PythonSoExt)
+
+$(WrapRubyFile): $(SwigFile)
+	$(SWIG) -c++ -ruby -o $(WrapRubyFile) $(SwigFile)
+	
+$(WrapPythonFile): $(SwigFile)
+	$(SWIG) -c++ -python -o $(WrapPythonFile) $(SwigFile)
+
+	
+clean:
+	(rm -f $(Program))
+	(rm -f *.o)
+	(rm -f $(WrapRubyFile))
+	(rm -f $(WrapPythonFile))
+	(rm -f $(RubySoExt))
+	(rm -f $(PythonSoExt))
+	(rm -f $(PythonPyExt))
+
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
