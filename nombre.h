@@ -6,7 +6,9 @@
 
 class Nombre : public QObject
 {
+#ifndef SWIG    
     Q_OBJECT
+#endif    
 public:
     Nombre(QObject* parent=0);
     Nombre(double v,QObject* parent=0);
