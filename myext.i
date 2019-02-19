@@ -13,6 +13,10 @@
   $1 = QString(PyUnicode_AsUTF8($input));  
 }
 
+// typecheck mandatory for overloaded constructor
+%typemap(typecheck,precedence=SWIG_TYPECHECK_STRING) QString {
+ $1 = PyUnicode_Check($input)? 1 : 0;
+}
 #endif
 // Nom du module en Ruby
 #ifdef SWIGRUBY
@@ -28,6 +32,10 @@
   $1 = QString(StringValuePtr($input));
 }
 
+// typecheck mandatory for overloaded constructor
+%typemap(typecheck,precedence=SWIG_TYPECHECK_STRING) QString {
+ $1 = RB_TYPE_P($input, T_STRING)? 1 : 0;
+}
 #endif
 
 

@@ -12,3 +12,5 @@ a.setNom("Truc")
 print(a.getNom())
 
 b=mypyext.Nombre(3.14,"pi")
+print(b.getNom()+" "+str(b.getV()))
+

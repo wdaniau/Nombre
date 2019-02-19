@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     cout << a->getNom().toLocal8Bit().constData() << endl;
     
     Nombre* b=new Nombre(3.14,"pi");
-
+    cout << b->getNom().toLocal8Bit().constData() << " " << b->getV() << endl;
+    
     q.quit();
 }

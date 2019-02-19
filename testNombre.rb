@@ -12,3 +12,4 @@ a.setNom("Truc")
 puts a.getNom
 
 b=Myrbext::Nombre.new(3.14,"pi")
+puts b.getNom+" "+b.getV.to_s
