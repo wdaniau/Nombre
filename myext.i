@@ -13,4 +13,12 @@
 #include "nombre.h"
 %}
 
-%include "nombre.h"
+class Nombre
+{
+public:
+    Nombre();
+    Nombre(double v);
+    void setV(double v);
+    double getV();
+};
+
