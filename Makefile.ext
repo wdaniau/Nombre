@@ -14,7 +14,7 @@ WrapPythonFile = myext_python_wrap.cxx
 PythonSoExt = _mypyext.so
 PythonPyExt = mypyext.py
 
-ObjectFiles = nombre.o
+ObjectFiles = nombre.o moc_nombre.o
 Program = testNombre
 
 RUBYINC = $(shell pkg-config --cflags ruby)
