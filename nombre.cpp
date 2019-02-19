@@ -3,10 +3,17 @@
 Nombre::Nombre()
 {
     valeur=0.0;
+    nom="";
 }
 
 Nombre::Nombre(double v) {
     valeur=v;
+    nom="";
+}
+
+Nombre::Nombre(double v, string n) {
+    valeur=v;
+    nom=n;
 }
 
 void Nombre::setV(double v) {
@@ -21,3 +28,10 @@ double Nombre::carre() {
     return valeur*valeur;
 }
 
+void Nombre::setNom(string n) {
+    nom = n;
+}
+
+string Nombre::getNom() {
+    return nom;
+}
