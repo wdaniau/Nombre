@@ -9,3 +9,6 @@ puts a.getV
 puts a.carre
 
 a.setNom("Truc")
+puts a.getNom
+
+b=Myrbext::Nombre.new(3.14,"pi")

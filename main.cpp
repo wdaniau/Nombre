@@ -17,6 +17,9 @@ int main(int argc, char *argv[])
     cout << a->carre() << endl;
     
     a->setNom("Truc");
+    cout << a->getNom().toLocal8Bit().constData() << endl;
+    
+    Nombre* b=new Nombre(3.14,"pi");
 
     q.quit();
 }

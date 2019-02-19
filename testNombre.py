@@ -9,3 +9,6 @@ print(str(a.getV()))
 print(str(a.carre()))
 
 a.setNom("Truc")
+print(a.getNom())
+
+b=mypyext.Nombre(3.14,"pi")

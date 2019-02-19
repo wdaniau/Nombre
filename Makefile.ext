@@ -23,7 +23,7 @@ PYTHONINC = $(shell pkg-config --cflags python3)
 QTINC = $(shell pkg-config --cflags Qt5Core)
 QTLIBS = $(shell pkg-config --libs Qt5Core)
 
-all: $(Program) $(RubySoExt) $(PythonSoExt)
+all: build $(Program) $(RubySoExt) $(PythonSoExt)
 
 $(Program): main.o $(ObjectFiles)
 
@@ -52,6 +52,6 @@ clean:
 	(rm -f $(PythonPyExt))
 
 
-$(ObjectFiles) main.o: nombre.pro
+build: nombre.pro
 	($(QMAKE) nombre.pro && make)
 
