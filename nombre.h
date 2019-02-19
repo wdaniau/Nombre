@@ -2,13 +2,15 @@
 #define NOMBRE_H
 
 #include<QString>
+#include<QObject>
 
-class Nombre
+class Nombre : public QObject
 {
+    Q_OBJECT
 public:
-    Nombre();
-    Nombre(double v);
-    Nombre(double v, QString n);
+    Nombre(QObject* parent=0);
+    Nombre(double v,QObject* parent=0);
+    Nombre(double v, QString n,QObject* parent=0);
     void setV(double v);
     double getV();
     double carre();

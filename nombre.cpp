@@ -1,17 +1,17 @@
 #include "nombre.h"
 
-Nombre::Nombre()
+Nombre::Nombre(QObject *parent) : QObject(parent)
 {
     valeur=0.0;
     nom="";
 }
 
-Nombre::Nombre(double v) {
+Nombre::Nombre(double v, QObject* parent) : QObject(parent) {
     valeur=v;
     nom="";
 }
 
-Nombre::Nombre(double v, QString n) {
+Nombre::Nombre(double v, QString n, QObject *parent)  : QObject(parent) {
     valeur=v;
     nom=n;
 }
