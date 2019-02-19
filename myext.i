@@ -8,6 +8,7 @@
 %module myrbext
 #endif
 
+%include <std_string.i>
 
 %{
 #include "nombre.h"
