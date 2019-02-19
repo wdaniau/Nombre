@@ -2,6 +2,7 @@
 CXX = g++
 CXXFLAGS = -fPIC
 SWIG = swig
+QMAKE = qmake
 
 Extension = myext
 SwigFile = myext.i
@@ -19,18 +20,20 @@ Program = testNombre
 RUBYINC = $(shell pkg-config --cflags ruby)
 PYTHONINC = $(shell pkg-config --cflags python3)
 
+QTINC = $(shell pkg-config --cflags Qt5Core)
+QTLIBS = $(shell pkg-config --libs Qt5Core)
+
 all: $(Program) $(RubySoExt) $(PythonSoExt)
 
 $(Program): main.o $(ObjectFiles)
-	$(CXX) $(CXXFLAGS) main.o $(ObjectFiles) -o $(Program)
 
 $(RubySoExt): $(SwigFile) $(WrapRubyFile) $(ObjectFiles)
-	$(CXX) $(CXXFLAGS) -shared $(RUBYINC) \
-	$(WrapRubyFile) $(ObjectFiles) -o $(RubySoExt)
+	$(CXX) $(CXXFLAGS) -shared $(RUBYINC) $(QTINC) \
+	$(WrapRubyFile) $(ObjectFiles) $(QTLIBS) -o $(RubySoExt)
 	
 $(PythonSoExt): $(Swigfile) $(WrapPythonFile) $(ObjectFiles)
-	$(CXX) $(CXXFLAGS) -shared $(PYTHONINC) \
-	$(WrapPythonFile) $(ObjectFiles) -o $(PythonSoExt)
+	$(CXX) $(CXXFLAGS) -shared $(PYTHONINC) $(QTINC) \
+	$(WrapPythonFile) $(ObjectFiles) $(QTLIBS) -o $(PythonSoExt)
 
 $(WrapRubyFile): $(SwigFile)
 	$(SWIG) -c++ -ruby -o $(WrapRubyFile) $(SwigFile)
@@ -49,5 +52,6 @@ clean:
 	(rm -f $(PythonPyExt))
 
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(ObjectFiles) main.o: nombre.pro
+	($(QMAKE) nombre.pro && make)
+

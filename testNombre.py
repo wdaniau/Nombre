@@ -8,3 +8,4 @@ a.setV(2.5)
 print(str(a.getV()))
 print(str(a.carre()))
 
+a.setNom("Truc")

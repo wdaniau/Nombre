@@ -8,4 +8,4 @@ a.setV(2.5)
 puts a.getV
 puts a.carre
 
-
+a.setNom("Truc")

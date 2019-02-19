@@ -1,5 +1,5 @@
 
-Remarque sur les include 
+Remarque sur les include
 ------------------------
 Il faut les paquets de développement ruby et python3
 
@@ -13,15 +13,15 @@ pkg-config --list-all | grep -i ruby
 
 Cela vaut également pour python3.
 
+Même problèmatique pour QT et qmake, suivant les distributions ce n'est pas toujours pareil entre QT4, QT5. Il faut juste vérifier qu'on utilise bien le qmake et les includes de la même version.
+
 
 Construction à la main 
 ----------------------
 
-# on génère les .o
-g++ -fPIC -c *.cpp
-
-# eventuellement on construit le programme test
-g++ main.o nombre.o -o testNombre
+# on génère les .o et le programme de test à l'aide de qmake
+qmake nombre.pro
+make
 
 # Construction des wrap
 # Wrap Ruby
